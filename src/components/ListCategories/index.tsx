@@ -7,7 +7,6 @@ import {
   List,
   IconCategory
 } from "./styles";
-import Corte from "../../assets/corte.svg";
 
 import { api } from "../../services/api";
 
@@ -37,9 +36,11 @@ export default function ListCategories() {
         keyExtractor={(item) => item.id}
         renderItem={({item}) => <ContainerCategory>
             <ButtonCategory>
-                <IconCategory source={{uri: 'http://192.168.2.118:3333/files/corte.png'}}/>
+                <IconCategory source={{uri: `${item.icon}`}}/>
             </ButtonCategory>
-            <Name>{item.name}</Name>
+            <Name>
+              {item.name[0].toUpperCase()+item.name.substring(1).toLowerCase()}
+            </Name>
         </ContainerCategory>}
         numColumns={3}
       />

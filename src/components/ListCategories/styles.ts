@@ -17,7 +17,10 @@ export const ButtonCategory = styled.TouchableOpacity`
 
 export const List = styled.FlatList``;
 
-export const IconCategory = styled.Image``;
+export const IconCategory = styled.Image`
+    width: 60px;
+    height: 60px;
+`;
 
 export const ContainerCategory = styled.View`
 
