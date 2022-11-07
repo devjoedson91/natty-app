@@ -5,10 +5,15 @@ import {
   ButtonCategory,
   Name,
   List,
-  IconCategory
+  IconCategory,
+  Title
 } from "./styles";
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import { api } from "../../services/api";
+
+import { StackParamsList } from '../../routes/app.routes';
 
 interface CategoryProps {
   id: string;
@@ -17,6 +22,9 @@ interface CategoryProps {
 }
 
 export default function ListCategories() {
+
+  const navigation = useNavigation<NativeStackNavigationProp<StackParamsList>>();
+  
   const [categories, setCategories] = useState<CategoryProps[] | []>([]);
 
   useEffect(() => {
@@ -29,13 +37,20 @@ export default function ListCategories() {
     getCategories();
   }, []);
 
+  function handleCategoryServices(category_id: string) {
+
+      navigation.navigate('Services', {category_id});
+
+  }
+
   return (
     <Container>
+      <Title>Categorias</Title>
       <List
         data={categories}
         keyExtractor={(item) => item.id}
         renderItem={({item}) => <ContainerCategory>
-            <ButtonCategory>
+            <ButtonCategory onPress={() => handleCategoryServices(item.id)}>
                 <IconCategory source={{uri: `${item.icon}`}}/>
             </ButtonCategory>
             <Name>

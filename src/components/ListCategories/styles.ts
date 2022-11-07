@@ -4,6 +4,7 @@ export const Container = styled.View`
 
     width: 100%;
     margin-top: 10px;
+    
 `;
 
 export const ButtonCategory = styled.TouchableOpacity`
@@ -34,4 +35,12 @@ export const Name = styled.Text`
     font-size: 16px;
     text-align: center;
     color: ${({theme}) => theme.colors.text};
+`;
+
+export const Title = styled.Text`
+    color: ${({theme}) => theme.colors.text};
+    font-size: 18px;
+    font-family: ${({theme}) => theme.fonts.bold};
+    text-align: center;
+    margin-bottom: 15px;
 `;

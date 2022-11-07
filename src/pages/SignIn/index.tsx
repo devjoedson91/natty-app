@@ -14,12 +14,13 @@ import {
 
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { StackParamsList } from "../../routes/app.routes";
 import * as Animatable from "react-native-animatable";
 import { AuthContext } from "../../contexts/AuthContext";
 
 export default function SignIn() {
 
-  const navigation = useNavigation<NativeStackNavigationProp<{}>>();
+  const navigation = useNavigation<NativeStackNavigationProp<StackParamsList>>();
 
   const { signIn, loadingAuth } = useContext(AuthContext);
 
@@ -34,17 +35,13 @@ export default function SignIn() {
 
   function handleRegisterUser() {
 
-      navigation.navigate('SignUp', {});
+      navigation.navigate('SignUp');
       
   }
 
   return (
     <Container>
       <Logo source={require("../../assets/logo.png")} />
-
-      <Animatable.View animation="fadeInLeft" delay={500}>
-        <Text>Bem vindo!</Text>
-      </Animatable.View>
 
       <Animatable.View
         animation="fadeInUp"
