@@ -22,7 +22,6 @@ import {
 import { useRoute, RouteProp, useNavigation } from "@react-navigation/native";
 import { api } from "../../services/api";
 
-
 type RouteDetailsParams = {
   Reserve: {
       service_id: string;
@@ -131,6 +130,12 @@ export default function Reserve() {
       const itemExists = filterSchedule.filter(item => item.id === item_id);
 
       setSelectedHour(itemExists[0].id);
+
+  }
+
+  function inOrder(schedule) {
+
+    console.log({...schedule});
 
   }
 

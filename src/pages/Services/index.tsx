@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text } from "react-native";
+import { View, Text } from "react-native";
 import { 
     Container, 
     ContainerService, 
@@ -76,21 +76,30 @@ export default function Services() {
 
     return (
         <Container>
-            <ListServices 
-                data={services}
-                keyExtractor={item => item.id}
-                renderItem={({item}) => 
-                    <ContainerService>
-                        <AreaDescription>
-                            <ServiceName>{item.name}</ServiceName>
-                            <Price>{formatPrice(item.price)}</Price>
-                        </AreaDescription>
-                        <ButtonReserve onPress={() => openReserve(item.id)}>
-                            <ButtonText>Reservar</ButtonText>
-                        </ButtonReserve>
-                    </ContainerService>
-                }
-            />
+            {
+                services.length <= 0 ? (
+                    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                        <Text>Sem serviços para a categoria selecionada</Text>
+                    </View>
+                ) : (
+                    <ListServices 
+                        data={services}
+                        keyExtractor={item => item.id}
+                        renderItem={({item}) => 
+                            <ContainerService>
+                                <AreaDescription>
+                                    <ServiceName>{item.name}</ServiceName>
+                                    <Price>{formatPrice(item.price)}</Price>
+                                </AreaDescription>
+                                <ButtonReserve onPress={() => openReserve(item.id)}>
+                                    <ButtonText>Reservar</ButtonText>
+                                </ButtonReserve>
+                            </ContainerService>
+                        }
+                    />
+                )
+            }
+            
         </Container>
     );
 
