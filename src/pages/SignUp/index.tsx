@@ -1,5 +1,5 @@
 import React, {useState, useContext} from "react";
-import { ActivityIndicator, StyleSheet } from "react-native";
+import { ActivityIndicator, StyleSheet, ToastAndroid } from "react-native";
 import {
   Container,
   Logo,
@@ -17,7 +17,6 @@ import {AuthContext} from '../../contexts/AuthContext';
 import { NativeStackNavigationProp  } from "@react-navigation/native-stack";
 import { StackParamsList } from '../../routes/app.routes';
 import { useNavigation } from "@react-navigation/native";
-import Toast from 'react-native-toast-message';
 
 export default function SignUp() {
 
@@ -39,12 +38,11 @@ export default function SignUp() {
 
         if (email  === '' || password === '' || name === '') {
 
-            Toast.show({
-                type: 'error',
-                text1: 'Dados obrigatórios não preenchidos',
-                autoHide: true,
-                visibilityTime: 3000
-            });
+            ToastAndroid.showWithGravity(
+                'Dados obrigatórios não preenchidos',
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM
+            );
             
             return;
 
@@ -94,7 +92,6 @@ export default function SignUp() {
                     onChangeText={setPassword}
                 />
 
-                <Toast />
                 <Button onPress={handleSignUp}>
                     {loadingAuth ? (
                         <ActivityIndicator size={25} color="#fff" />

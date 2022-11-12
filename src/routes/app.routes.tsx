@@ -5,7 +5,7 @@ import Dashboard from '../pages/Dashboard';
 import Services from '../pages/Services';
 import Reserve from '../pages/Reserve';
 
-import { Feather } from '@expo/vector-icons';
+import { Feather, AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
 
 import { AuthContext } from '../contexts/AuthContext';
@@ -51,8 +51,12 @@ function AppRoutes() {
                             <Feather name="log-out" size={28} color='#ff3f4b' />
                         </TouchableOpacity>
 
-                    )
-                    
+                    ),
+                    headerRight: () => (
+                        <TouchableOpacity>
+                            <AntDesign name="calendar" size={30} color="black" />
+                        </TouchableOpacity>
+                    )                  
                 }}/>
 
                 <Stack.Screen name='Services' component={Services} options={{
@@ -66,6 +70,11 @@ function AppRoutes() {
                         borderTopWidth: 1,
                         borderColor: '#A5A4B4'
                     },
+                    headerRight: () => (
+                        <TouchableOpacity>
+                            <AntDesign name="calendar" size={30} color="black" />
+                        </TouchableOpacity>
+                    )
                 }} />
 
                 <Stack.Screen 
@@ -82,6 +91,11 @@ function AppRoutes() {
                             borderTopWidth: 1,
                             borderColor: '#A5A4B4'
                         },
+                        headerRight: () => (
+                            <TouchableOpacity>
+                                <AntDesign name="calendar" size={30} color="black" />
+                            </TouchableOpacity>
+                        )
                     }}
                 />
 

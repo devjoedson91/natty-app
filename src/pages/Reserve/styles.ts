@@ -49,14 +49,17 @@ export const ScheduleList = styled.FlatList`
     margin-top: 20px;
 `;
 
-export const ButtonHour = styled.TouchableOpacity`
+export const ButtonHour = styled.TouchableOpacity.attrs(props => ({
+    disabled: props.isReserved ? true : false
+}))`
     display: flex;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
     width: 100px;
     height: 42px;
-    background-color: ${({selected}) => selected ? '#ee4691' : '#f0f0f5'};
+    background-color: ${props => props.selected ? '#ee4691' : '#f0f0f5'};
+    opacity: ${props => props.isReserved ? 0.5 : 1};
     border-radius: 5px;
     border: 1px solid;
     border-color: ${({theme}) => theme.colors.grayLight};
