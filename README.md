@@ -18,8 +18,12 @@ Concluído
 - Opção de cancelamento da reserva.
 
 ## Layout mobile
+![mobile 1](https://github.com/devjoedson91/easyservices-api/blob/main/tmp/login-user.jpg)
+![mobile 1](https://github.com/devjoedson91/easyservices-api/blob/main/tmp/register-user.jpg)
+![mobile 1](https://github.com/devjoedson91/easyservices-api/blob/main/tmp/dashboard.jpg)
+![mobile 1](https://github.com/devjoedson91/easyservices-api/blob/main/tmp/services.jpg)
 ![mobile 1](https://github.com/devjoedson91/easyservices-api/blob/main/tmp/make-reservation.jpg)
-
+![mobile 1](https://github.com/devjoedson91/easyservices-api/blob/main/tmp/my-reservations.jpg)
 
 # Tecnologias utilizadas
 ## Front end
