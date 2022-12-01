@@ -18,12 +18,15 @@ Concluído
 - Opção de cancelamento da reserva.
 
 ## Layout mobile
-![mobile 1](https://github.com/devjoedson91/easyservices-api/blob/main/tmp/login-user.jpg)
-![mobile 1](https://github.com/devjoedson91/easyservices-api/blob/main/tmp/register-user.jpg)
-![mobile 1](https://github.com/devjoedson91/easyservices-api/blob/main/tmp/dashboard.jpg)
-![mobile 1](https://github.com/devjoedson91/easyservices-api/blob/main/tmp/services.jpg)
-![mobile 1](https://github.com/devjoedson91/easyservices-api/blob/main/tmp/make-reservation.jpg)
-![mobile 1](https://github.com/devjoedson91/easyservices-api/blob/main/tmp/my-reservations.jpg)
+
+<div style="display: flex; gap: 10px;">
+   <img src="https://github.com/devjoedson91/easyservices-api/blob/main/tmp/login-user.jpg" width="100" />
+   <img src="https://github.com/devjoedson91/easyservices-api/blob/main/tmp/register-user.jpg" width="100" />
+   <img src="https://github.com/devjoedson91/easyservices-api/blob/main/tmp/dashboard.jpg" width="100" />
+   <img src="https://github.com/devjoedson91/easyservices-api/blob/main/tmp/services.jpg" width="100" />
+   <img src="https://github.com/devjoedson91/easyservices-api/blob/main/tmp/make-reservation.jpg" width="100" />
+   <img src="https://github.com/devjoedson91/easyservices-api/blob/main/tmp/my-reservations.jpg" width="100" />
+</div>
 
 # Tecnologias utilizadas
 ## Front end
