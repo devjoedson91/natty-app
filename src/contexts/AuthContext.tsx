@@ -1,6 +1,9 @@
 import React, { useState, createContext, ReactNode, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { api } from '../services/api';
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/native";
+import {StackParamsList} from '../routes/app.routes';
 
 // tipagens
 
@@ -11,6 +14,7 @@ type AuthContextData = {
     signIn: (credentials: SignInProps) => Promise<void>; // <void> promise nao vai devolver nada
     signUp: (credentials: SignUpProps) => Promise<void>;
     signOut: () => Promise<void>;
+    goToMyReservations: () => void;
     loadingAuth: boolean;
     loading: boolean
 
@@ -47,6 +51,8 @@ type SignUpProps = {
 export const AuthContext = createContext({} as AuthContextData);
 
 export function AuthProvider({children}: AuthProviderProps) {
+
+    const navigation = useNavigation<NativeStackNavigationProp<StackParamsList>>();
 
     const [user, setUser] = useState<UserProps>({
 
@@ -155,9 +161,15 @@ export function AuthProvider({children}: AuthProviderProps) {
 
     }
 
+    function goToMyReservations() {
+
+        navigation.navigate('MyReservations');
+
+    }
+
     return (
 
-       <AuthContext.Provider value={{ user, isAuthenticated, loading, loadingAuth, signIn, signOut, signUp }}>
+       <AuthContext.Provider value={{ user, isAuthenticated, loading, loadingAuth, signIn, signOut, signUp, goToMyReservations }}>
 
             {children}
 

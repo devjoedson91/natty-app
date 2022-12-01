@@ -166,7 +166,20 @@ export default function Reserve() {
             
           });
 
-          setDataSchedule(filterSchedules);
+          if (dateSelected !== undefined) {
+
+              let nowDateParse = Date.parse(initialDate);
+              let selectedDateParse = Date.parse(dateSelected.dateString);
+    
+              if (selectedDateParse >= nowDateParse) {
+                  setDataSchedule(filterSchedules);
+              }
+      
+          } else {
+
+             setDataSchedule(filterSchedules);
+
+          }
 
       }
 
@@ -248,18 +261,18 @@ export default function Reserve() {
             data={dataSchedule}
             keyExtractor={(item) => item.id}
             renderItem={({item}) => (
-              <ButtonHour onPress={() => handleSelectHour(item.hour)} selected={item.hour === hourSelected} isReserved={hoursReserved.some(hour => hour.hour === item.hour)}>
+              <ButtonHour onPress={() => handleSelectHour(item.hour)} selected={item.hour === hourSelected} isReserved={hoursReserved.some(hours => hours.hour === item.hour)}>
                 <HourText>
                   {item.hour}
                 </HourText>
               </ButtonHour>
             )}
             horizontal={true}
-          />) : (<ListText>Sem horários disponíveis para esta data</ListText>)
+          />) : (<ListText>Sem horários disponíveis para esta data 🙁</ListText>)
         }
       </Schedule>
 
-      <ButtonReserve onPress={handleSaveReserve}>
+      <ButtonReserve onPress={handleSaveReserve} isClicked={loading}>
         {
           loading ? (<ActivityIndicator size={20} color="#fff"/>) : (<ButtonText>confirmar reserva</ButtonText>)
         }

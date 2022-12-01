@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Dashboard from '../pages/Dashboard';
 import Services from '../pages/Services';
 import Reserve from '../pages/Reserve';
+import MyReservations from '../pages/MyReservations';
 
 import { Feather, AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
@@ -19,13 +20,14 @@ export type StackParamsList = {
     Reserve: {
         service_id: string;
     };
+    MyReservations: undefined;
 }
 
 const Stack = createNativeStackNavigator<StackParamsList>();
 
 function AppRoutes() {
 
-    const { signOut } = useContext(AuthContext);
+    const { signOut, goToMyReservations } = useContext(AuthContext);
 
     return (
 
@@ -53,7 +55,9 @@ function AppRoutes() {
 
                     ),
                     headerRight: () => (
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={goToMyReservations}
+                        >
                             <AntDesign name="calendar" size={30} color="black" />
                         </TouchableOpacity>
                     )                  
@@ -71,7 +75,9 @@ function AppRoutes() {
                         borderColor: '#A5A4B4'
                     },
                     headerRight: () => (
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={goToMyReservations}
+                        >
                             <AntDesign name="calendar" size={30} color="black" />
                         </TouchableOpacity>
                     )
@@ -92,12 +98,31 @@ function AppRoutes() {
                             borderColor: '#A5A4B4'
                         },
                         headerRight: () => (
-                            <TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={goToMyReservations}
+                            >
                                 <AntDesign name="calendar" size={30} color="black" />
                             </TouchableOpacity>
                         )
                     }}
                 />
+
+                <Stack.Screen 
+                    name='MyReservations' 
+                    component={MyReservations} 
+                    options={{
+                        title: 'Minhas reservas',
+                        headerTitleAlign: 'center',
+                        headerTitleStyle: {
+                            color: '#5841AD'
+                        },
+                        headerShadowVisible: false,
+                        contentStyle: {
+                            borderTopWidth: 1,
+                            borderColor: '#A5A4B4'
+                        },
+                    }}
+                 />
 
         </Stack.Navigator>
 

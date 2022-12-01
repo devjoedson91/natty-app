@@ -16,7 +16,9 @@ export const TextHeader = styled.Text`
 
 `;
 
-export const ButtonReserve = styled.TouchableOpacity`
+export const ButtonReserve = styled.TouchableOpacity.attrs(props => ({
+    disabled: props.isClicked ? true : false
+}))`
     display: flex;
     justify-content: center;
     align-items: center;

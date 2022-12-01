@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { 
     Container, 
     ContainerService, 
@@ -16,6 +16,8 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useRoute, RouteProp, useNavigation } from "@react-navigation/native";
 import { api } from "../../services/api";
 import { StackParamsList } from '../../routes/app.routes';
+import Loading from "../../components/Loading";
+import { Entypo } from "@expo/vector-icons";
 
 type RouteDetailsParams = {
     Service: {
@@ -44,9 +46,9 @@ export default function Services() {
 
     useEffect(() => {
 
-        async function loadServices() {
+        setLoading(true);
 
-            setLoading(true);
+        async function loadServices() {
 
             const response = await api.get('/category/service', {
                 params: {category_id: categorySelected}
@@ -69,9 +71,7 @@ export default function Services() {
 
     if (loading) {
 
-        return (
-            <Text>Carregando serviços...</Text>
-        );
+        return <Loading />
     }
 
     return (
@@ -79,7 +79,7 @@ export default function Services() {
             {
                 services.length <= 0 ? (
                     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                        <Text>Sem serviços para a categoria selecionada</Text>
+                        <Text>Sem serviços para a categoria selecionada 🙁</Text>
                     </View>
                 ) : (
                     <ListServices 
@@ -89,7 +89,10 @@ export default function Services() {
                             <ContainerService>
                                 <AreaDescription>
                                     <ServiceName>{item.name}</ServiceName>
-                                    <Price>{formatPrice(item.price)}</Price>
+                                    <View style={styles.descriptionBlock}>
+                                        <Entypo name="price-tag" size={15} color="black" />
+                                        <Price>{formatPrice(item.price)}</Price>
+                                    </View>
                                 </AreaDescription>
                                 <ButtonReserve onPress={() => openReserve(item.id)}>
                                     <ButtonText>Reservar</ButtonText>
@@ -104,3 +107,11 @@ export default function Services() {
     );
 
 }
+
+const styles = StyleSheet.create({
+    descriptionBlock: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center'
+    }
+});

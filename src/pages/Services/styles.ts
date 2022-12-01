@@ -7,14 +7,13 @@ export const Container = styled.View`
 export const ContainerService = styled.View`
 
     width: 100%;
-    height: 120px;
+    height: 100px;
     border-bottom-width: 1px;
     border-color: ${({theme}) => theme.colors.grayLight};
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    
-    padding: 0 15px;
+    padding: 5px 15px;
 `;
 
 export const Price = styled.Text`
@@ -22,12 +21,13 @@ export const Price = styled.Text`
     font-size: 16px;
     font-family: ${({theme}) => theme.fonts.medium};
     color: ${({theme}) => theme.colors.blue400};
+    margin-left: 5px;
 
 `;
 
 export const ServiceName = styled.Text`
     font-size: 16px;
-    font-family: ${({theme}) => theme.fonts.medium};
+    font-family: ${({theme}) => theme.fonts.bold};
     color: ${({theme}) => theme.colors.text};
 `;
 
@@ -51,6 +51,6 @@ export const ListServices = styled.FlatList``;
 
 export const AreaDescription = styled.View`
     
-    justify-content: center;
+    justify-content: flex-end;
     
 `;
