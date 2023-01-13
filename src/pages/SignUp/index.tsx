@@ -34,12 +34,28 @@ export default function SignUp() {
 
     }
 
+    function validateEmail(email: string) { 
+        const regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; 
+        
+        return regex.test(email) ;
+    }
+
     async function handleSignUp() {
 
         if (email  === '' || password === '' || name === '') {
 
             ToastAndroid.showWithGravity(
                 'Dados obrigatórios não preenchidos',
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM
+            );
+            
+            return;
+
+        } else if(!validateEmail(email)) {
+
+            ToastAndroid.showWithGravity(
+                'Informe um email válido',
                 ToastAndroid.SHORT,
                 ToastAndroid.BOTTOM
             );

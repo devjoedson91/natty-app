@@ -14,7 +14,7 @@ export const UserName = styled.Text`
     font-size: 18px;
     font-family: ${({theme}) => theme.fonts.bold};
     text-align: center;
-    margin-top: 15px;
+    margin-top: 20px;
     color: ${({theme}) => theme.colors.text};
 
 `;
@@ -26,7 +26,7 @@ export const ContainerCategories = styled.View`
 `;
 
 export const Logo = styled.Image`
-    margin-top: 15px;
+    margin-top: 20px;
     align-self: center;
 
 `;

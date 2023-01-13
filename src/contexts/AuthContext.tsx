@@ -4,6 +4,7 @@ import { api } from '../services/api';
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
 import {StackParamsList} from '../routes/app.routes';
+import { ToastAndroid } from 'react-native';
 
 // tipagens
 
@@ -108,6 +109,12 @@ export function AuthProvider({children}: AuthProviderProps) {
 
             const response = await api.post('/users', { name, email, password });
             setLoadingAuth(false);
+
+            ToastAndroid.showWithGravity(
+                'Usuário cadastrado com sucesso!',
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM
+            );
 
         } catch(err) {
             console.log('ERRO AO CADASTRAR: ', err);

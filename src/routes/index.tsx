@@ -6,33 +6,24 @@ import AuthRoutes from './auth.routes';
 import { AuthContext } from '../contexts/AuthContext';
 
 function Routes() {
-
     const { isAuthenticated, loading } = useContext(AuthContext);
 
     if (loading) {
-
         return (
-
-            <View style={{
-                flex: 1,
-                backgroundColor: '#f0f0f5',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-
-                    <ActivityIndicator size={60} color='#5841AD' />
-
+            <View
+                style={{
+                    flex: 1,
+                    backgroundColor: '#f0f0f5',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}
+            >
+                <ActivityIndicator size={60} color="#5841AD" />
             </View>
-
         );
-
     }
 
-    return (
-
-        isAuthenticated ? <AppRoutes /> : <AuthRoutes />
-    );
-
+    return isAuthenticated ? <AppRoutes /> : <AuthRoutes />;
 }
 
 export default Routes;

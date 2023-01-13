@@ -4,7 +4,6 @@ import {
   ContainerCategory,
   ButtonCategory,
   Name,
-  List,
   IconCategory,
   Title
 } from "./styles";
@@ -14,6 +13,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { api } from "../../services/api";
 
 import { StackParamsList } from '../../routes/app.routes';
+import { FlatList } from "react-native";
 
 interface CategoryProps {
   id: string;
@@ -45,8 +45,8 @@ export default function ListCategories() {
 
   return (
     <Container>
-      <Title>Categorias</Title>
-      <List
+      <Title>categorias</Title>
+      <FlatList
         data={categories}
         keyExtractor={(item) => item.id}
         renderItem={({item}) => <ContainerCategory>

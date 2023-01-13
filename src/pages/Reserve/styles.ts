@@ -1,4 +1,10 @@
-import styled from "styled-components/native";
+import styled, {css} from "styled-components/native";
+
+interface ButtonProps {
+    disabled: boolean;
+    selected: boolean;
+    isClicked: boolean;
+}
 
 export const Container = styled.View`
    
@@ -16,7 +22,7 @@ export const TextHeader = styled.Text`
 
 `;
 
-export const ButtonReserve = styled.TouchableOpacity.attrs(props => ({
+export const ButtonReserve = styled.TouchableOpacity.attrs<ButtonProps>(props => ({
     disabled: props.isClicked ? true : false
 }))`
     display: flex;
@@ -47,21 +53,15 @@ export const ScheduleText = styled.Text`
     color: ${({theme}) => theme.colors.gray400};
 `;
 
-export const ScheduleList = styled.FlatList`
-    margin-top: 20px;
-`;
-
-export const ButtonHour = styled.TouchableOpacity.attrs(props => ({
-    disabled: props.isReserved ? true : false
-}))`
+export const ButtonHour = styled.TouchableOpacity<ButtonProps>`
     display: flex;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
     width: 100px;
     height: 42px;
-    background-color: ${props => props.selected ? '#ee4691' : '#f0f0f5'};
-    opacity: ${props => props.isReserved ? 0.5 : 1};
+    ${(props) => css`background-color: ${props.selected ? '#ee4691' : '#f0f0f5'}`};
+    ${(props) => css`opacity: ${props.disabled ? 0.5 : 1};`};
     border-radius: 5px;
     border: 1px solid;
     border-color: ${({theme}) => theme.colors.grayLight};

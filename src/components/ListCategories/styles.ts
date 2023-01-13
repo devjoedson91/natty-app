@@ -3,7 +3,6 @@ import styled from "styled-components/native";
 export const Container = styled.View`
 
     width: 100%;
-    margin-top: 10px;
     
 `;
 
@@ -15,8 +14,6 @@ export const ButtonCategory = styled.TouchableOpacity`
     justify-content: center;
     align-items: center;
 `;
-
-export const List = styled.FlatList``;
 
 export const IconCategory = styled.Image`
     width: 60px;
@@ -40,7 +37,7 @@ export const Name = styled.Text`
 export const Title = styled.Text`
     color: ${({theme}) => theme.colors.text};
     font-size: 18px;
-    font-family: ${({theme}) => theme.fonts.bold};
-    text-align: center;
+    text-transform: uppercase;
+    font-family: ${({theme}) => theme.fonts.medium};
     margin-bottom: 15px;
 `;

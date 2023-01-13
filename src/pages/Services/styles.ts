@@ -13,7 +13,7 @@ export const ContainerService = styled.View`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 5px 15px;
+    padding: 15px;
 `;
 
 export const Price = styled.Text`
