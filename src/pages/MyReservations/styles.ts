@@ -5,8 +5,6 @@ export const Container = styled.View`
     background: ${({theme}) => theme.colors.white};
 `;
 
-export const ListReservations = styled.FlatList``;
-
 export const ContainerReservations = styled.View`
     width: 100%;
     /* height: 120px; */

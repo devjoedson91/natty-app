@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     Container,
     TextHeader,
@@ -48,12 +48,37 @@ type HoursList = {
     hour: string;
 };
 
+interface MarkedDateProps {
+    selected: boolean;
+    selectedColor: string;
+    // dotColor: string;
+    // marked: boolean;
+    // disabled: boolean;
+    // disableTouchEvent: boolean;
+    // activeOpacity: number;
+}
+
+interface MarkedDateKeysProp {
+    [key: string]: MarkedDateProps;
+}
+
 export default function Reserve() {
     const route = useRoute<ReserveRouteProps>();
     const serviceSelected = route.params.service_id;
     const initialDate = currentDate(new Date());
-    const [dataSchedule, setDataSchedule] = useState<ScheduleProps[] | []>([]);
-    const [dateSelected, setDateSelected] = useState<DateProps>();
+    const [dataSchedule, setDataSchedule] = useState<ScheduleProps[]>([]);
+    const [dateSelected, setDateSelected] = useState<DateProps>(() => {
+        return {
+            dateString: initialDate,
+            day: Number(initialDate.slice(8, 10)),
+            month: Number(initialDate.slice(5, 7)),
+            timestamp: Date.parse(initialDate),
+            year: new Date(initialDate).getFullYear(),
+        };
+    });
+
+    // const [scheduleDate, setScheduleDate] = useState<ScheduleProps[]>([]);
+
     const [hourSelected, setHourSelected] = useState('');
     const [userInfo, setUserInfor] = useState<UserInfo>();
     const [loading, setLoading] = useState(false);
@@ -82,52 +107,72 @@ export default function Reserve() {
     }, []);
 
     useEffect(() => {
-        async function loadSchedule() {
-            const response = await api.get('/schedule/service', {
-                params: { service_id: serviceSelected },
+        loadSchedules();
+    }, [dateSelected]);
+
+    async function loadSchedules() {
+        setLoading(true);
+        try {
+            const response = await api.get('/schedule/service/date', {
+                params: {
+                    service_id: serviceSelected,
+                    date: dateSelected.dateString,
+                },
             });
 
-            const filterSchedules = response.data.filter((schedule) => {
-                if (dateSelected?.dateString === undefined) {
-                    return schedule.date === initialDate;
-                } else {
-                    return schedule.date === dateSelected?.dateString;
-                }
-            });
-
-            if (dateSelected !== undefined) {
-                const nowDateParse = Date.parse(initialDate);
-                const selectedDateParse = Date.parse(dateSelected.dateString);
-
-                if (selectedDateParse >= nowDateParse) {
-                    setDataSchedule(filterSchedules);
-                } else if (selectedDateParse < nowDateParse) {
-                    setDataSchedule([]);
-                }
-            } else {
-                setDataSchedule(filterSchedules);
-            }
+            setLoading(false);
+            setDataSchedule(response.data);
+        } catch (err) {
+            console.log('erro ao carregar horários:', err);
+            // toastMessages('Erro ao carregar horários');
         }
+    }
 
-        loadSchedule();
+    // useEffect(() => {
+    //     async function loadSchedule() {
+    //         const response = await api.get('/schedule/service', {
+    //             params: { service_id: serviceSelected },
+    //         });
 
-        const mapHours = reservations
-            .filter((reserve) => {
-                if (dateSelected?.dateString === undefined) {
-                    return reserve.date.slice(0, 10) === initialDate;
-                } else {
-                    return reserve.date.slice(0, 10) === dateSelected?.dateString;
-                }
-            })
-            .map((item) => item);
+    //         const filterSchedules = response.data.filter((schedule) => {
+    //             if (dateSelected?.dateString === undefined) {
+    //                 return schedule.date === initialDate;
+    //             } else {
+    //                 return schedule.date === dateSelected?.dateString;
+    //             }
+    //         });
 
-        setHoursReserved(mapHours);
-    }, [dateSelected, reservations]);
+    //         if (dateSelected !== undefined) {
+    //             const nowDateParse = Date.parse(initialDate);
+    //             const selectedDateParse = Date.parse(dateSelected.dateString);
+
+    //             if (selectedDateParse >= nowDateParse) {
+    //                 setDataSchedule(filterSchedules);
+    //             } else if (selectedDateParse < nowDateParse) {
+    //                 setDataSchedule([]);
+    //             }
+    //         } else {
+    //             setDataSchedule(filterSchedules);
+    //         }
+    //     }
+
+    //     loadSchedule();
+
+    //     const mapHours = reservations
+    //         .filter((reserve) => {
+    //             if (dateSelected?.dateString === undefined) {
+    //                 return reserve.date.slice(0, 10) === initialDate;
+    //             } else {
+    //                 return reserve.date.slice(0, 10) === dateSelected?.dateString;
+    //             }
+    //         })
+    //         .map((item) => item);
+
+    //     setHoursReserved(mapHours);
+    // }, [dateSelected, reservations]);
 
     function handleSelectHour(item_hour: string) {
-        const itemExists = dataSchedule.filter((item) => item.hour === item_hour);
-
-        setHourSelected(itemExists[0].hour);
+        setHourSelected(item_hour);
     }
 
     async function handleSaveReserve() {
@@ -191,6 +236,12 @@ export default function Reserve() {
         }
     }
 
+    let currentDateMarked = dateSelected.dateString;
+
+    let markedDates: MarkedDateKeysProp = {};
+
+    markedDates[currentDateMarked ?? initialDate] = { selected: true, selectedColor: '#5841AD' };
+
     localeConfig.defaultLocale = 'br';
 
     return (
@@ -198,14 +249,14 @@ export default function Reserve() {
             <TextHeader>Escolha uma data e horário para sua reserva</TextHeader>
             <Calendar
                 style={styles.calendar}
-                initialDate={
+                current={
                     dateSelected?.dateString === undefined ? initialDate : dateSelected?.dateString
                 }
+                markedDates={markedDates}
+                minDate={initialDate}
                 onDayPress={(date) => {
                     setDateSelected(date);
                 }}
-                horizontal={true}
-                pagingEnabled={true}
             />
 
             <Schedule>

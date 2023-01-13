@@ -33,7 +33,7 @@ localeConfig.locales["br"] = {
     ],
     dayNames: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],
     dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
-    today: "Hoje",
+    today: "Hoje"
 };
 
 

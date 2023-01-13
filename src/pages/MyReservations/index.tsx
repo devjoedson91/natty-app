@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Alert, ToastAndroid } from 'react-native';
+import { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Alert, ToastAndroid, FlatList } from 'react-native';
 import {
     Container,
-    ListReservations,
     ContainerReservations,
     ButtonReserve,
     ButtonText,
@@ -35,35 +34,31 @@ export default function MyReservations() {
     }, []);
 
     useEffect(() => {
-        setLoading(true);
-
-        async function loadReservations() {
-            const response = await api.get('/reserve/detail/user', {
-                params: { user_id: userInfo?.id },
-            });
-
-            setMyReservations(response.data);
-            setLoading(false);
-        }
-
         loadReservations();
     }, []);
+
+    async function loadReservations() {
+        setLoading(true);
+        const response = await api.get('/reserve/detail/user', {
+            params: { user_id: userInfo?.id },
+        });
+
+        setMyReservations(response.data);
+        setLoading(false);
+    }
 
     function handleCancelReservation(reserve_id: string) {
         Alert.alert('Minhas reservas', 'Deseja realmente cancelar esta reserva?', [
             {
                 text: 'SIM',
                 onPress: async () => {
+                    setLoading(true);
                     try {
                         const response = await api.delete('/reserve', {
                             params: { reserve_id: reserve_id },
                         });
 
-                        const reloadReservations = await api.get('/reserve/detail/user', {
-                            params: { user_id: userInfo?.id },
-                        });
-
-                        setMyReservations(reloadReservations.data);
+                        loadReservations();
 
                         ToastAndroid.showWithGravity(
                             'Reserva cancelada com sucesso!',
@@ -99,8 +94,10 @@ export default function MyReservations() {
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <Text>Sem reservas cadastradas 🙁</Text>
                 </View>
+            ) : loading ? (
+                <Loading />
             ) : (
-                <ListReservations
+                <FlatList
                     data={myReservations}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
