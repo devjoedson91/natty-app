@@ -1,4 +1,4 @@
-import styled from 'styled-components/native';
+import styled, {css} from 'styled-components/native';
 
 export const Container = styled.View`
     flex: 1;
@@ -22,11 +22,15 @@ export const ButtonText = styled.Text`
     color: ${({theme}) => theme.colors.white};
 `;
 
-export const ButtonReserve = styled.TouchableOpacity`
+interface ButtonProp {
+    isFinalized: boolean;
+}
+
+export const ButtonReserve = styled.TouchableOpacity<ButtonProp>`
     width: 147px;
     height: 38px;
     border-radius: 6px;
-    background-color: ${({theme}) => theme.colors.blue400};
+    ${props => css`background-color: ${props.isFinalized ? '#C4A7D0' : '#5841AD'};`}
     justify-content: center;
     align-items: center;
     align-self: center;

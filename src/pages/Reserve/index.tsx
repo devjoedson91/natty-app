@@ -77,13 +77,10 @@ export default function Reserve() {
         };
     });
 
-    // const [scheduleDate, setScheduleDate] = useState<ScheduleProps[]>([]);
-
     const [hourSelected, setHourSelected] = useState('');
     const [userInfo, setUserInfor] = useState<UserInfo>();
     const [loading, setLoading] = useState(false);
-    const [reservations, setReservations] = useState<ReservationsProps[] | []>([]);
-    const [hoursReserved, setHoursReserved] = useState<HoursList[] | []>([]);
+    const [reservations, setReservations] = useState<ReservationsProps[]>([]);
     const navigation = useNavigation<NativeStackNavigationProp<StackParamsList>>();
 
     useEffect(() => {
@@ -97,18 +94,20 @@ export default function Reserve() {
     }, []);
 
     useEffect(() => {
-        async function loadReservations() {
-            const response = await api.get('/reserve');
-
-            setReservations(response.data);
-        }
-
         loadReservations();
-    }, []);
-
-    useEffect(() => {
         loadSchedules();
     }, [dateSelected]);
+
+    async function loadReservations() {
+        const response = await api.get('/reserve/detail/date', {
+            params: {
+                date: dateSelected.dateString,
+                service_id: serviceSelected,
+            },
+        });
+
+        setReservations(response.data);
+    }
 
     async function loadSchedules() {
         setLoading(true);
@@ -124,52 +123,13 @@ export default function Reserve() {
             setDataSchedule(response.data);
         } catch (err) {
             console.log('erro ao carregar horários:', err);
-            // toastMessages('Erro ao carregar horários');
+            ToastAndroid.showWithGravity(
+                'Erro ao carregar horários',
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM
+            );
         }
     }
-
-    // useEffect(() => {
-    //     async function loadSchedule() {
-    //         const response = await api.get('/schedule/service', {
-    //             params: { service_id: serviceSelected },
-    //         });
-
-    //         const filterSchedules = response.data.filter((schedule) => {
-    //             if (dateSelected?.dateString === undefined) {
-    //                 return schedule.date === initialDate;
-    //             } else {
-    //                 return schedule.date === dateSelected?.dateString;
-    //             }
-    //         });
-
-    //         if (dateSelected !== undefined) {
-    //             const nowDateParse = Date.parse(initialDate);
-    //             const selectedDateParse = Date.parse(dateSelected.dateString);
-
-    //             if (selectedDateParse >= nowDateParse) {
-    //                 setDataSchedule(filterSchedules);
-    //             } else if (selectedDateParse < nowDateParse) {
-    //                 setDataSchedule([]);
-    //             }
-    //         } else {
-    //             setDataSchedule(filterSchedules);
-    //         }
-    //     }
-
-    //     loadSchedule();
-
-    //     const mapHours = reservations
-    //         .filter((reserve) => {
-    //             if (dateSelected?.dateString === undefined) {
-    //                 return reserve.date.slice(0, 10) === initialDate;
-    //             } else {
-    //                 return reserve.date.slice(0, 10) === dateSelected?.dateString;
-    //             }
-    //         })
-    //         .map((item) => item);
-
-    //     setHoursReserved(mapHours);
-    // }, [dateSelected, reservations]);
 
     function handleSelectHour(item_hour: string) {
         setHourSelected(item_hour);
@@ -270,7 +230,9 @@ export default function Reserve() {
                             <ButtonHour
                                 onPress={() => handleSelectHour(item.hour)}
                                 selected={item.hour === hourSelected}
-                                disabled={hoursReserved.some((hours) => hours.hour === item.hour)}
+                                disabled={reservations.some(
+                                    (reserve) => reserve.hour === item.hour
+                                )}
                             >
                                 <HourText>{item.hour}</HourText>
                             </ButtonHour>

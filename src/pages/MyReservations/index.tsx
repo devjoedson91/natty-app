@@ -48,6 +48,18 @@ export default function MyReservations() {
     }
 
     function handleCancelReservation(reserve_id: string) {
+        const currentReservation = myReservations.find((reserve) => reserve.id === reserve_id);
+
+        if (currentReservation?.status) {
+            ToastAndroid.showWithGravity(
+                'Reserva finalizada pelo o gestor do App!',
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM
+            );
+
+            return;
+        }
+
         Alert.alert('Minhas reservas', 'Deseja realmente cancelar esta reserva?', [
             {
                 text: 'SIM',
@@ -117,8 +129,14 @@ export default function MyReservations() {
                                     <Price>{formatPrice(parseFloat(item.services.price))}</Price>
                                 </View>
                             </AreaDescription>
-                            <ButtonReserve onPress={() => handleCancelReservation(item.id)}>
-                                <ButtonText>Cancelar Reserva</ButtonText>
+                            <ButtonReserve
+                                onPress={() => handleCancelReservation(item.id)}
+                                disabled={item.status}
+                                isFinalized={item.status}
+                            >
+                                <ButtonText>
+                                    {item.status ? 'Finalizada' : 'Cancelar Reserva'}
+                                </ButtonText>
                             </ButtonReserve>
                         </ContainerReservations>
                     )}
