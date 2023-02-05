@@ -1,21 +1,33 @@
 # Natty App
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/devsuperior/sds1-wmazoni/blob/master/LICENSE) 
 
-# Sobre o projeto
+## Sobre o projeto
 
 Projeto de aplicativo para cadastro de reservas de serviços de salão de beleza.
 
-# Status
+## Status
 
 Concluído
 
-# Funcionalidades
+## Funcionalidades
 
 - Registro e login de usuários.
 - Seleção de categorias e serviços.
 - Cadastro de reservas de acordo com as datas e horários disponibilizados pelo admin do aplicativo.
 - Visualização de data, hora e preço do serviço de reservas cadastradas pelo usuário.
 - Opção de cancelamento da reserva.
+
+## Hábilidades aplicadas no projeto
+
+- Construção de API própria com conexão ao um banco de dados
+- RESTFUL
+- HTTP
+- Tratamento de dados com funções assincronas
+- Validações
+- Tratamento de erros
+- Mensagens ao usuário
+- Fluxo de aplicação
+- Animações
 
 ## Layout mobile
 
@@ -40,6 +52,10 @@ Concluído
 - Node js
 - Express
 - postGresql
+- Prisma io
+- Typescript
+- Dotenv
+- JWT
 
 # Como executar o projeto
 
