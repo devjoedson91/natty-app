@@ -32,12 +32,13 @@ Concluído
 ## Layout mobile
 
 <div style="display: flex; gap: 15px;">
-   <img src="https://github.com/devjoedson91/natty-server/blob/main/tmp/login.jpg" width="200" />
-   <img src="https://github.com/devjoedson91/easyservices-api/blob/main/tmp/register-user.jpg" width="200" />
-   <img src="https://github.com/devjoedson91/easyservices-api/blob/main/tmp/dashboard.jpg" width="200" />
-   <img src="https://github.com/devjoedson91/easyservices-api/blob/main/tmp/services.jpg" width="200" />
-   <img src="https://github.com/devjoedson91/easyservices-api/blob/main/tmp/make-reservation.jpg" width="200" />
-   <img src="https://github.com/devjoedson91/easyservices-api/blob/main/tmp/my-reservations.jpg" width="200" />
+   <img src="https://github.com/devjoedson91/natty-server/blob/main/tmp/login-user.jpg" width="200" />
+   <img src="https://github.com/devjoedson91/natty-server/blob/main/tmp/dashboard.jpg" width="200" />
+   <img src="https://github.com/devjoedson91/natty-server/blob/main/tmp/make-reservation.jpg" width="200" />
+   <img src="https://github.com/devjoedson91/natty-server/blob/main/tmp/my-reservations.jpg" width="200" />
+   <img src="https://github.com/devjoedson91/natty-server/blob/main/tmp/register-user.jpg" width="200" />
+   <img src="https://github.com/devjoedson91/natty-server/blob/main/tmp/reservations.jpg" width="200" />
+   <img src="https://github.com/devjoedson91/natty-server/blob/main/tmp/services.jpg" width="200" />
 </div>
 
 # Tecnologias utilizadas
