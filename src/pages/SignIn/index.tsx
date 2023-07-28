@@ -1,22 +1,23 @@
 import React, {useState, useContext} from "react";
-import { ActivityIndicator, StyleSheet } from "react-native";
+import { ActivityIndicator, Pressable, StyleSheet } from "react-native";
 import {
   Container,
-  Logo,
   Input,
   Button,
   ButtonText,
-  Text,
   Title,
   ButtonRegister,
   RegisterText,
+  PasswordContainer
 } from "./styles";
+import { Feather } from "@expo/vector-icons"
 
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { StackParamsList } from "../../routes/app.routes";
 import * as Animatable from "react-native-animatable";
 import { AuthContext } from "../../contexts/AuthContext";
+import { Logo } from "../../components/Logo";
 
 export default function SignIn() {
 
@@ -26,6 +27,8 @@ export default function SignIn() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [hidePass, setHidePass] = useState(true);
 
   async function handleLogin() {
     if (email === "" || password === "") return;
@@ -41,11 +44,13 @@ export default function SignIn() {
 
   return (
     <Container>
-      <Logo source={require("../../assets/logo.png")} />
+      <Animatable.View animation="fadeInDown" delay={500}>
+          <Logo />
+      </Animatable.View>
 
       <Animatable.View
-        animation="fadeInUp"
-        delay={500}
+        animation="fadeIn"
+        delay={1500}
         style={styles.inputContainer}
       >
         <Title>Email</Title>
@@ -56,12 +61,22 @@ export default function SignIn() {
         />
 
         <Title>Senha</Title>
-        <Input 
-          placeholder="Digite sua senha..." 
-          secureTextEntry={true} 
-          value={password}
-          onChangeText={setPassword}
-        />
+        <PasswordContainer>
+            <Input 
+              placeholder="Digite sua senha..." 
+              secureTextEntry={hidePass} 
+              value={password}
+              onChangeText={setPassword}
+            />
+            <Pressable
+              onPress={() => setHidePass(!hidePass)}
+              style={{position: 'absolute', right: 20, top: 5}}
+            >
+                {
+                  hidePass ? ( <Feather name="eye-off" size={25} /> ) : (<Feather name="eye" size={25} />)
+                }
+            </Pressable>
+        </PasswordContainer>
 
         <Button onPress={handleLogin}>
           {loadingAuth ? (

@@ -25,6 +25,10 @@ export const Input = styled.TextInput`
 
 `;
 
+export const PasswordContainer = styled.View`
+    position: relative;
+`;
+
 export const Title = styled.Text`
     font-size: 20px;
     margin-top: 28px;

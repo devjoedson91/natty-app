@@ -9,6 +9,14 @@ export const Container = styled.View`
 
 `;
 
+export const LogoText = styled.Text`
+
+    font-family: ${({theme}) => theme.fonts.bold};
+    text-align: center;
+    font-size: 48px;
+    
+`;
+
 export const UserName = styled.Text`
 
     font-size: 18px;

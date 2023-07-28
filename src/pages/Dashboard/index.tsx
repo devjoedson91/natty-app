@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Logo, ContainerCategories, UserName } from './styles';
+import { useEffect, useState } from 'react';
+import { Container, ContainerCategories, UserName } from './styles';
 
 import ListCategories from '../../components/ListCategories';
 import { api } from '../../services/api';
 import * as Animatable from 'react-native-animatable';
 import Loading from '../../components/Loading';
+import { Logo } from '../../components/Logo';
 
 export interface UserInfo {
     id: string;
@@ -35,16 +36,21 @@ export default function Dashboard() {
 
     return (
         <Container>
-            <Animatable.View animation="fadeInDown" delay={500}>
-                <Logo source={require('../../assets/logo.png')} />
+            <Animatable.View 
+                animation="fadeInDown" 
+                delay={500} 
+            >
+                <Logo />
             </Animatable.View>
 
             <Animatable.View animation="fadeInUpBig" delay={500}>
-                <UserName>{userInfo && `Bem vindo(a), ${userInfo?.name}.`}</UserName>
+                <UserName>{userInfo && `Bem vindo! ${userInfo?.name}.`}</UserName>
             </Animatable.View>
 
             <ContainerCategories>
-                <ListCategories />
+                <Animatable.View animation="fadeIn" delay={1500}>
+                    <ListCategories />
+                </Animatable.View>
             </ContainerCategories>
         </Container>
     );
