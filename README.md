@@ -31,15 +31,11 @@ Concluído
 
 ## Layout mobile
 
-<div style="display: flex; gap: 15px;">
-   <img src="https://github.com/devjoedson91/natty-server/blob/main/tmp/login-user.jpg" width="200" />
-   <img src="https://github.com/devjoedson91/natty-server/blob/main/tmp/dashboard.jpg" width="200" />
-   <img src="https://github.com/devjoedson91/natty-server/blob/main/tmp/make-reservation.jpg" width="200" />
-   <img src="https://github.com/devjoedson91/natty-server/blob/main/tmp/my-reservations.jpg" width="200" />
-   <img src="https://github.com/devjoedson91/natty-server/blob/main/tmp/register-user.jpg" width="200" />
-   <img src="https://github.com/devjoedson91/natty-server/blob/main/tmp/reservations.jpg" width="200" />
-   <img src="https://github.com/devjoedson91/natty-server/blob/main/tmp/services.jpg" width="200" />
-</div>
+### App Video Demo
+
+<a href="https://www.linkedin.com/feed/update/urn:li:activity:7090837162908086272/" target="_blank">
+  <img src="https://github.com/devjoedson91/natty-server/blob/main/tmp/login-user.jpg" width="220" heght="220" />
+</a>
 
 # Tecnologias utilizadas
 ## Front end
